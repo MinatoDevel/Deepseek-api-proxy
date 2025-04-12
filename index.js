@@ -4,7 +4,10 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 10000;
+ const PORT = process.env.PORT || 10000; // Render requires dynamic port binding
+app.listen(PORT, '0.0.0.0', () => {    // '0.0.0.0' is crucial for Render
+  console.log(`Server running on port ${PORT}`);
+});
 
 app.use(cors());
 app.use(express.json());
