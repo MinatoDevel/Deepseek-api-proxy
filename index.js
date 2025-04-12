@@ -11,12 +11,14 @@ app.use(express.json());
 
 app.post('/chat', async (req, res) => {
   try {
-    const { messages } = req.body;
+    console.log('Request received. Attempting to call DeepSeek API...');
+    console.log('Using API Key:', process.env.DEEPSEEK_API_KEY ? '*** (exists)' : 'MISSING!');
+
     const response = await axios.post(
       'https://api.deepseek.com/v1/chat/completions',
       {
-        model: 'deepseek-coder',
-        messages,
+        model: 'deepseek-v3',
+        messages: req.body.messages,
         max_tokens: 300,
       },
       {
@@ -24,12 +26,22 @@ app.post('/chat', async (req, res) => {
           'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`,
           'Content-Type': 'application/json',
         },
+        timeout: 5000 // 5-second timeout
       }
     );
+
+    console.log('DeepSeek API response:', response.status);
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('FULL ERROR DETAILS:', {
+      message: error.message,
+      code: error.code,
+      response: error.response?.data,
+      stack: error.stack
+    });
+    res.status(500).json({ 
+      error: 'DeepSeek API failed',
+      details: error.message 
+    });
   }
 });
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
