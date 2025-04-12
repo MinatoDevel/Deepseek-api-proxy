@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 10000;
 app.use(cors());
 app.use(express.json());
 
-// Root route - NEW ADDITION
+// Root route
 app.get('/', (req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
         body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
         code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
         a { color: #0070f3; text-decoration: none; }
+        pre { background: #f8f8f8; padding: 15px; border-radius: 5px; overflow-x: auto; }
       </style>
     </head>
     <body>
@@ -37,7 +38,14 @@ app.get('/', (req, res) => {
       <h2>Usage Example</h2>
       <pre>curl -X POST https://${req.hostname}/chat \\
   -H "Content-Type: application/json" \\
-  -d '{"messages": [{"role": "user", "content": "Hello!"}]}'</pre>
+  -d '{
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hello!"
+      }
+    ]
+  }'</pre>
     </body>
     </html>
   `);
@@ -80,7 +88,7 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-// Start server - IMPORTANT: Use Render's required bind address
+// Start server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
