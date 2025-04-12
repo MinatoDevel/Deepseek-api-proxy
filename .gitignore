@@ -1,32 +1,47 @@
-# Environment files (CRITICAL - never commit secrets!)
-.env
-.env.*
-!.env.example  # Keep example files (if needed)
+# ==================== #
+# 1. SECRETS & CONFIGS #
+# ==================== #
+.env               # Main environment file
+.env.local         # Local overrides
+.env.development   # Dev-specific vars
+.env.production    # Production vars (if used)
+config.json        # API configuration files
+*.key              # SSL/TLS keys
+*.pem
 
-# Dependency directories
-node_modules/
+# ==================== #
+# 2. DEPENDENCIES #
+# ==================== #
+node_modules/      # Never commit dependencies
+package-lock.json  # If using npm (optional)
+yarn.lock         # If using yarn
+pnpm-lock.yaml    # If using pnpm
 
-# API-related files
-api_responses/  # Local API response caching
-*.ai_cache     # AI-specific cache files
+# ==================== #
+# 3. API SPECIFICS #
+# ==================== #
+api_responses/     # Cached API responses
+*.ai_cache         # AI model cache files
+*.api_log          # API request logs
 
-# Logs and temp files
-*.log
-logs/
-tmp/
-npm-debug.log*
+# ==================== #
+# 4. RUNTIME ARTIFACTS #
+# ==================== #
+*.log              # Application logs
+logs/              # Log directory
+tmp/               # Temporary files
+npm-debug.log*     # NPM debug logs
 
-# Editor/IDE files
-.vscode/
-.idea/
-*.swp
+# ==================== #
+# 5. EDITOR & IDE #
+# ==================== #
+.vscode/           # VS Code config
+.idea/             # JetBrains IDE
+*.swp              # Vim swap files
 *.swo
 
-# System files
-.DS_Store
-Thumbs.db
-
-# Optional (for more complex projects)
-dist/          # If using TypeScript/Babel
-build/         # If compiling
-coverage/      # Test coverage
+# ==================== #
+# 6. SYSTEM FILES #
+# ==================== #
+.DS_Store          # macOS metadata
+Thumbs.db          # Windows cache
