@@ -1,2 +1,32 @@
-node_modules/
+# Environment files (CRITICAL - never commit secrets!)
 .env
+.env.*
+!.env.example  # Keep example files (if needed)
+
+# Dependency directories
+node_modules/
+
+# API-related files
+api_responses/  # Local API response caching
+*.ai_cache     # AI-specific cache files
+
+# Logs and temp files
+*.log
+logs/
+tmp/
+npm-debug.log*
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Optional (for more complex projects)
+dist/          # If using TypeScript/Babel
+build/         # If compiling
+coverage/      # Test coverage
