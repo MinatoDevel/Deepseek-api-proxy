@@ -15,7 +15,7 @@ app.post('/chat', async (req, res) => {
     const response = await axios.post(
       'https://api.deepseek.com/v1/chat/completions',
       {
-        model: 'deepseek-codert',
+        model: 'deepseek-coder',
         messages,
         max_tokens: 300,
       },
